@@ -1,0 +1,43 @@
+<!DOCTYPE html>{% load static %}
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Книги{% endblock %}</title>
+      <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="{% static "css/bootstrap.css" %}"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="{% static "css/style.css" %}"  media="screen,projection"/>
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  </head>
+
+  <body>
+    {% block content %}
+    <div class="container">
+        <div class="header">
+            <h1><a href="/books">Каталог</a></h1>
+        </div>
+        <div class="row">
+            {% for book in books%}
+            <div class="book col-md-4">
+                <h2>{{ book.name }}</h2>
+                <p>Автор: {{ book.author }}</p>
+                <p>Дата публикации: {{ book.pub_date }}</p>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="row">
+            {% if previosd %}
+                <a class="button button-primary" href="{% url 'book' previosd %}">{{ previosd }}</a>
+            {% endif %}
+            {% if nextd %}
+                <a class="button button-primary" href="{% url 'book' nextd %}">{{ nextd }}</a>
+            {% endif %}
+        </div>
+    </div>
+    {% endblock %}
+    <!--JavaScript at end of body for optimized loading-->
+    <script type="text/javascript" src="{% static "js/bootstrap.js" %}"></script>
+  </body>
+</html>
