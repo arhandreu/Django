@@ -1,11 +1,16 @@
 from django.contrib import admin
 
-from .models import Student, Teacher
+from .models import Student, Teacher, TeacherStudents
+
+
+class TeacherStudentsInline(admin.StackedInline):
+    model = TeacherStudents
+    extra = 2
 
 
 @admin.register(Student)
 class StudentAdmin(admin.ModelAdmin):
-    pass
+    inlines = [TeacherStudentsInline, ]
 
 
 @admin.register(Teacher)
