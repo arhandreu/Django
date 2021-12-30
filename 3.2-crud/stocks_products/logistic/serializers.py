@@ -10,12 +10,10 @@ class ProductSerializer(serializers.ModelSerializer):
 
 
 class ProductPositionSerializer(serializers.ModelSerializer):
-    title = serializers.CharField(source='product.title')
-    description = serializers.CharField(source='product.description')
 
     class Meta:
         model = StockProduct
-        fields = ['product', 'quantity', 'price', 'title', 'description']
+        fields = ['product', 'quantity', 'price']
 
 
 class StockSerializer(serializers.ModelSerializer):
