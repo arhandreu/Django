@@ -17,6 +17,8 @@ class StockFilter(django_filters.rest_framework.FilterSet):
         fields = ['product', 'description']
 
 
+
+
 class ProductViewSet(ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
@@ -30,7 +32,7 @@ class StockViewSet(ModelViewSet):
     queryset = Stock.objects.all()
     serializer_class = StockSerializer
     filter_backends = [DjangoFilterBackend, SearchFilter]
-    # filterset_fields = ['products', ]
+    filterset_fields = ['products', ]
     # search_fields = ['product', ]
     filter_class = StockFilter
     # при необходимости добавьте параметры фильтрации
