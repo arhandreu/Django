@@ -6,4 +6,4 @@ from advertisements.models import Advertisement
 
 @admin.register(Advertisement)
 class AdvertisementAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['title', 'creator', 'status']
