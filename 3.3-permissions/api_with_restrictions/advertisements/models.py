@@ -32,6 +32,7 @@ class Advertisement(models.Model):
         auto_now=True,
         verbose_name='Дата обновления',
     )
+    draft = models.BooleanField(default=False, verbose_name='Черновик')
 
     class Meta:
         verbose_name = 'Объявление'
