@@ -33,6 +33,7 @@ class Advertisement(models.Model):
         verbose_name='Дата обновления',
     )
     draft = models.BooleanField(default=False, verbose_name='Черновик')
+    favorite = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='favorite', blank=True)
 
     class Meta:
         verbose_name = 'Объявление'

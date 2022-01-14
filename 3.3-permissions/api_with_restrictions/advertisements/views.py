@@ -23,9 +23,9 @@ class AdvertisementViewSet(ModelViewSet):
     def list(self, request, *args, **kwargs):
 
         if request.user.is_authenticated:
-            queryset = Advertisement.objects.filter(Q(draft=False) | Q(creator=request.user))
+            queryset = self.filter_queryset(Advertisement.objects.filter(Q(draft=False) | Q(creator=request.user)))
         else:
-            queryset = Advertisement.objects.filter(draft=False)
+            queryset = self.filter_queryset(Advertisement.objects.filter(draft=False))
         # page = self.paginate_queryset(queryset)
         # if page is not None:
         #     serializer = self.get_serializer(page, many=True)
