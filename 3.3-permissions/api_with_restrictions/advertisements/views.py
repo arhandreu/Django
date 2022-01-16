@@ -1,4 +1,5 @@
 from django.db.models import Q
+from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
@@ -19,6 +20,22 @@ class AdvertisementViewSet(ModelViewSet):
 
     # TODO: настройте ViewSet, укажите атрибуты для кверисета,
     #   сериализаторов и фильтров
+
+    @action(detail=True, methods=['PATCH'], permission_classes=[IsAuthenticated])
+    def change_fav(self, request, pk=None):
+        obj = self.get_object()
+        user = request.user
+        if user.is_anonymous:
+            return Response({'answer': 'Вы не авторизованы'})
+        if user == obj.creator:
+            return Response({'answer': 'Вы автор и не можете добавить статью в избранное!'})
+        else:
+            if user in obj.favorite.all():
+                obj.favorite.remove(user)
+                return Response({'answer': 'Cтатья удалена из избранного'})
+            else:
+                obj.favorite.add(user)
+                return Response({'answer': 'Cтатья добавлены в избранные'})
 
     def list(self, request, *args, **kwargs):
 

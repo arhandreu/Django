@@ -7,4 +7,3 @@ class IsOwnerOrStuff(BasePermission):
             return True
         elif request.method in ['DELETE', 'PATCH', 'PUT']:
             return request.user == obj.creator
-
