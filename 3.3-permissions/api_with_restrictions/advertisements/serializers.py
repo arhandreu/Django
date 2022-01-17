@@ -42,7 +42,7 @@ class AdvertisementSerializer(serializers.ModelSerializer):
             if open_adv >= 10 and data.get('status', "OPEN") in ["OPEN", "Открыто"]:
                 raise ValidationError("Вы не можете иметь больше 10 открытых объявлений")
         if self.context["request"].method in ['PUT', 'PATCH']:
-            if open_adv >= -0 and self.instance.status in ["CLOSED", "Закрыто"]:
+            if open_adv >= 10 and self.instance.status in ["CLOSED", "Закрыто"]:
                 if data.get('status') in ["OPEN", "Открыто"]:
                     raise ValidationError("Вы не можете иметь больше 10 открытых объявлений")
 
